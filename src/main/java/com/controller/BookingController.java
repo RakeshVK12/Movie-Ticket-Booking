@@ -1,10 +1,15 @@
 package com.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,18 +27,45 @@ public class BookingController {
 	
 	@PostMapping("/bookAShow/{showId}")
 	public ResponseEntity<Booking> bookAShow(@RequestBody @Valid Booking booking, @PathVariable String showId) throws InvalidEntityException{
-//		ResponseEntity<Booking> book = service.bookAShow(booking, showId);
+		Booking book = service.bookAShow(booking, showId);
 		
 		
-		return new ResponseEntity<>(service.bookAShow(booking, showId),HttpStatus.OK);			
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(book);
+				
 		
 	}
 	
-	
+	@PutMapping("/bookings/{bookingId}/ticketCount/{ticketCount}")
 	public ResponseEntity<Booking> updateTicketCount(@PathVariable String bookingId, @PathVariable int ticketCount) throws InvalidEntityException {
 		
 
 		return new ResponseEntity<>(service.updateTicketCount(bookingId, ticketCount), HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/viewBookingByDate/{bookingDate}")
+	public ResponseEntity<List<Booking>> viewBookingByDate(@PathVariable LocalDate bookingDate) throws InvalidEntityException {
+		
+		List<Booking> book = service.viewBookingByDate(bookingDate);
+		return ResponseEntity.ok(book);
+				
+	}
+
+	@GetMapping("/viewBookingByShowId/{showId}")
+	public ResponseEntity<List<Booking>> viewBookingByShowId(@PathVariable String showId) throws InvalidEntityException{
+		List<Booking> bookings = service.viewBookingByShowId(showId);
+		
+		return ResponseEntity.ok(bookings);
+		
+	}
+	
+	@GetMapping("/cancelBooking/{bookingId}")
+	public ResponseEntity<Booking> cancelBooking(@PathVariable String bookingId) throws InvalidEntityException {
+		Booking booking = service.cancelBooking(bookingId);
+		
+		return ResponseEntity.ok(booking);
+		
 	}
 	
 }
