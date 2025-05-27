@@ -29,11 +29,8 @@ public class BookingController {
 	public ResponseEntity<Booking> bookAShow(@RequestBody @Valid Booking booking, @PathVariable String showId) throws InvalidEntityException{
 		Booking book = service.bookAShow(booking, showId);
 		
-		
 		return ResponseEntity.status(HttpStatus.CREATED)
 				.body(book);
-				
-		
 	}
 	
 	@PutMapping("/bookings/{bookingId}/ticketCount/{ticketCount}")

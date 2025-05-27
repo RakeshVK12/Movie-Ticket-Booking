@@ -1,17 +1,22 @@
 package com.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Map;
 
-import com.repository.BookingRepository;
-import com.repository.ShowRepository;
+import com.model.ShowInfo;
 
-@Service
-public class ShowService {
+public interface ShowService {
 	
-	@Autowired
-	BookingRepository repo;
+	public ShowInfo addShow(ShowInfo show);
 	
-	@Autowired
-	ShowRepository showRepo;
+	public ShowInfo updateShowDuration(String showId, int duration);
+	
+	public ShowInfo viweByShowId(String showId);
+	
+	public List<ShowInfo> viewByGenreAndLanguage(String genre, String language);
+	
+	public Map<String, Integer> getShowWiseTicketCount();
+	
+	
+	
 }
