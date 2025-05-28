@@ -11,7 +11,7 @@ public interface ShowService {
 	
 	public ShowInfo updateShowDuration(String showId, int duration);
 	
-	public ShowInfo viweByShowId(String showId);
+	public ShowInfo getByShowId(String showId);
 	
 	public List<ShowInfo> viewByGenreAndLanguage(String genre, String language);
 	

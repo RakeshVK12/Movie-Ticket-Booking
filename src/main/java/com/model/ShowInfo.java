@@ -45,15 +45,21 @@ public class ShowInfo {
 	private LocalDate startDate;
 	
 	@Min(value=30, message="Duration is betwwen 30 and 120")
-	@Max(value=30, message="Duration is between 30 and 120")
+	@Max(value=120, message="Duration is between 30 and 120")
 	private int duration;
 	
 	@Positive(message="Provide valid Ticket Price")
 	private double ticketPrice;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="showObj")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="showInfo")
 	@JsonIgnoreProperties("showObj")
 	private List<Booking> bookings;
+
+	
+	public ShowInfo() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	public String getShowId() {
 		return showId;

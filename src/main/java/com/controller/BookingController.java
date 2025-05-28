@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,13 +52,13 @@ public class BookingController {
 
 	@GetMapping("/viewBookingByShowId/{showId}")
 	public ResponseEntity<List<Booking>> viewBookingByShowId(@PathVariable String showId) throws InvalidEntityException{
-		List<Booking> bookings = service.viewBookingByShowId(showId);
+		List<Booking> bookings = service.findByShowId(showId);
 		
 		return ResponseEntity.ok(bookings);
 		
 	}
 	
-	@GetMapping("/cancelBooking/{bookingId}")
+	@DeleteMapping("/cancelBooking/{bookingId}")
 	public ResponseEntity<Booking> cancelBooking(@PathVariable String bookingId) throws InvalidEntityException {
 		Booking booking = service.cancelBooking(bookingId);
 		

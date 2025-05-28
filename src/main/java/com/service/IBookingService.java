@@ -2,8 +2,10 @@ package com.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.exception.InvalidEntityException;
 import com.model.Booking;
@@ -11,6 +13,7 @@ import com.model.ShowInfo;
 import com.repository.BookingRepository;
 import com.repository.ShowRepository;
 
+@Service
 public class IBookingService implements BookingService{
 	
 	@Autowired
@@ -57,10 +60,14 @@ public class IBookingService implements BookingService{
 
 
 	@Override
-	public List<Booking> viewBookingByShowId(String showId) throws InvalidEntityException {
+	public List<Booking> findByShowId(String showId) throws InvalidEntityException {
 		ShowInfo show = showrepo.findById(showId)
 				.orElseThrow(() -> new InvalidEntityException("Show Id "+ showId+" is not found"));
-		return repo.showBookingByShowId(showId);
+		
+			return repo.findByShowInfoShowId(showId);
+//	if(book == null) {
+//		return 
+//	}
 	}
 
 

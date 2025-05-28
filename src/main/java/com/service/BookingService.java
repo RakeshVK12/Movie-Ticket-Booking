@@ -14,7 +14,7 @@ public interface BookingService {
 	
 	public List<Booking> viewBookingByDate(LocalDate bookingDate) throws InvalidEntityException;
 	
-	public List<Booking> viewBookingByShowId(String showId) throws InvalidEntityException;
+	public List<Booking> findByShowId(String showId) throws InvalidEntityException;
 
 	public Booking cancelBooking(String bookingId) throws InvalidEntityException;
 	

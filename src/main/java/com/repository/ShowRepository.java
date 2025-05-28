@@ -11,10 +11,11 @@ import com.model.ShowInfo;
 @Repository
 public interface ShowRepository extends JpaRepository<ShowInfo,String> {
 	
-	List<ShowInfo> viewByGenreAndLanguage(String genre, String language);
+	List<ShowInfo> findByGenreAndLanguage(String genre, String language);
 	
-	@Query(value = "SELECT s.name AS showName, COUNT(t.id) AS ticketCount FROM tickets t JOIN shows s ON t.show_id = s.id GROUP BY s.name", nativeQuery = true)
+	@Query(value = "SELECT s.show_id AS showId, COUNT(b.booking_id) AS ticketCount FROM booking b JOIN show_info s ON b.show_id = s.show_id GROUP BY s.show_id", nativeQuery = true)
 	List<Object[]> getShowWiseTicketCount();
+//	List<Object[]> getShowWiseTicketCount();
 
 
 }

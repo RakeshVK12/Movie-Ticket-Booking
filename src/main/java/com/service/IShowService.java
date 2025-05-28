@@ -34,15 +34,15 @@ public class IShowService implements ShowService {
 	}
 
 	@Override
-	public ShowInfo viweByShowId(String showId) {
-		ShowInfo info = showRepo.getById(showId);
-		
-		return info;
+	public ShowInfo getByShowId(String showId) {
+	    return showRepo.findById(showId)
+	        .orElseThrow(() -> new RuntimeException("Show not found with id: " + showId));
 	}
+
 
 	@Override
 	public List<ShowInfo> viewByGenreAndLanguage(String genre, String language) {
-		List<ShowInfo> show = showRepo.viewByGenreAndLanguage(genre, language);
+		List<ShowInfo> show = showRepo.findByGenreAndLanguage(genre, language);
 		
 		return show;
 	}

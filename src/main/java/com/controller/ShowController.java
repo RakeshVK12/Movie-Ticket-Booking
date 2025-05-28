@@ -23,7 +23,7 @@ public class ShowController {
 	@Autowired
 	IShowService service;
 	
-	@PutMapping("/addShow")
+	@PostMapping("/addShow")
 	public ResponseEntity<ShowInfo> addShow(@RequestBody ShowInfo show){
 		ShowInfo show1 = service.addShow(show);
 		
@@ -32,7 +32,7 @@ public class ShowController {
 		
 	}
 	
-	@PostMapping("/updateShowDuration/{showId}/{duration}")
+	@PutMapping("/updateShowDuration/{showId}/{duration}")
 	public ResponseEntity<ShowInfo> updateShowDuration(@PathVariable String showId,@PathVariable int duration) {
 		
 		ShowInfo show = service.updateShowDuration(showId, duration);
@@ -40,15 +40,19 @@ public class ShowController {
 		return ResponseEntity.ok(show);
 	}
 	
+	@GetMapping("/test")
+	public String test() {
+	    return "Controller is working!";
+	}
 	
-	@GetMapping("/viewByShowId/{showId}")
-	public ResponseEntity<ShowInfo> viweByShowId(@PathVariable String showId) {
-		ShowInfo show = service.viweByShowId(showId);
+	@GetMapping("/getByShowId/{showId}")
+	public ResponseEntity<ShowInfo> getByShowId(@PathVariable String showId) {
+		ShowInfo show = service.getByShowId(showId);
 		return ResponseEntity.ok(show);
 	}
 	
 	@GetMapping("/viewByGenreAndLanguage/{genre}/{language}")
-	public ResponseEntity<List<ShowInfo>> viewByGenreAndLanguage(String genre, String language) {
+	public ResponseEntity<List<ShowInfo>> viewByGenreAndLanguage(@PathVariable String genre, @PathVariable String language) {
 		List<ShowInfo> list = service.viewByGenreAndLanguage(genre, language);
 		
 		
